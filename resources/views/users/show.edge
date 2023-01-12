@@ -11,13 +11,7 @@
 
   <main>
     <div>
-      <ul>
-        @each(user in users)
-          <li><a href="{{ route('auth.create') }}">{{ user.email }}</a></li>
-        @end
-      </ul>
-      <h1 class="title"> It Works! </h1>
-      <a href="{{ route('auth.create') }}">login</a>
+      {{ user.email }}
     </div>
   </main>
 </body>

@@ -13,7 +13,7 @@
     <div>
       <ul>
         @each(user in users)
-          <li><a href="{{ route('auth.create') }}">{{ user.email }}</a></li>
+          <li><a href="{{ route('users.show', { id: user.id }) }}">{{ user.email }}</a></li>
         @end
       </ul>
       <h1 class="title"> It Works! </h1>

@@ -17,18 +17,15 @@
 | import './routes/customer''
 |
 */
-
-import { Request } from '@adonisjs/core/build/standalone'
 import Route from '@ioc:Adonis/Core/Route'
-
-Route.get('/', async ({ view }) => {
-  return view.render('welcome')
-})
-
 
 Route.get('/login', async ({ view }) => {
   return view.render('auth/create')
 }).as('auth.create')
+
+Route.get('/users', 'UsersController.index').as('users.index')
+Route.get('/users/:id', 'UsersController.show').as('users.show')
+
 
 Route.post('/login', async({ request, view }) => {
   const { email, password } = request.only(['email', 'password'])
