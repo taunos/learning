@@ -14,4 +14,17 @@ export default class UsersController {
 
     return view.render('users/show', {user: user})
   }
+
+  public async create({ view }: HttpContextContract) {
+
+    return view.render('users/create')
+  }
+
+  public async store({ request, response }: HttpContextContract) {
+    const { email ,password } = request.only(['email', 'password'])
+
+    const user = await User.create({ email: email, password: password })
+
+    return response.redirect().toRoute('users.show', {id: user.id})
+  }
 }

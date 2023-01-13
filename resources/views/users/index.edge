@@ -9,6 +9,13 @@
 </head>
 <body>
 
+  @if(auth.isLoggedIn)
+  <p> Olá {{ auth.user.email }} </p>
+  <a href=" {{ route('auth.destroy') }}">Logout</a>
+  @else
+  <p>Você não está logado</p>
+  @endif
+
   <main>
     <div>
       <ul>
@@ -18,6 +25,7 @@
       </ul>
       <h1 class="title"> It Works! </h1>
       <a href="{{ route('auth.create') }}">login</a>
+      <a href="{{ route('users.create') }}">Criar Usuário</a>
     </div>
   </main>
 </body>

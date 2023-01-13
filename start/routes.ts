@@ -19,18 +19,16 @@
 */
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/login', async ({ view }) => {
-  return view.render('auth/create')
-}).as('auth.create')
-
 Route.get('/users', 'UsersController.index').as('users.index')
+Route.get('/users/create', 'UsersController.create').as('users.create')
+Route.post('/users', 'UsersController.store').as('users.store')
 Route.get('/users/:id', 'UsersController.show').as('users.show')
 
+Route.get('/login', 'AuthController.create').as('auth.create')
+Route.post('/login', 'AuthController.store').as('auth.store')
+Route.get('/logout', 'AuthController.destroy').as('auth.destroy')
 
-Route.post('/login', async({ request, view }) => {
-  const { email, password } = request.only(['email', 'password'])
-
-  console.log(email, password)
-
-  return view.render('welcome')
-})
+Route.get('/admin', ({ view }) => {
+  return view.render('admin/index')
+}).middleware('auth')
+.as('admin.index')
