@@ -1,1 +1,4 @@
 build
+public/assets/entrypoints.json
+public/assets/manifest.json
+.github/
