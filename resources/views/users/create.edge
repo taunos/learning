@@ -10,8 +10,8 @@
 <body>
 
   <main>
-    <div>
-      <h1 class="title"> Criar usuário: </h1>
+    <div class="w-full max-w-xs">
+      <h1 class="text-3xl font-bold underline"> Criar usuário: </h1>
       @form({ action: route('users.store'), method: 'POST' })
         @!form.input({ name: 'email', type: 'email', label: 'Email' })
         @!form.input({ name: 'password', type: 'password', label: 'Senha' })
