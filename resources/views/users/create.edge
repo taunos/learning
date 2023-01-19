@@ -12,13 +12,13 @@
   <main>
     <div>
       <h1 class="title"> Criar usuário: </h1>
-      <form action="{{ route('users.store') }}" method="post">
-        <label for="email">Email</label>
-        <input type="email" name="email">
-        <label for="password">Password</label>
-        <input name="password" type="password">
-        <button type="submit">Criar</button>
-      </form>
+      @form({ action: route('users.store'), method: 'POST' })
+        @!form.input({ name: 'email', type: 'email', label: 'Email' })
+        @!form.input({ name: 'password', type: 'password', label: 'Senha' })
+        @form.button({ type: 'submit' })
+          Criar
+        @end
+      @end
     </div>
   </main>
 </body>

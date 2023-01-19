@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdonisJS - A fully featured web framework for Node.js</title>
-  @entryPointStyles('app')
-  @entryPointScripts('app')
-</head>
-<body>
+@layout('layouts/main')
 
+@section('content')
   @if(auth.isLoggedIn)
-  <p> Olá {{ auth.user.email }} </p>
-  <a href=" {{ route('auth.destroy') }}">Logout</a>
+    <p> Olá {{ auth.user.email }} </p>
+    <a href=" {{ route('auth.destroy') }}">Logout</a>
   @else
-  <p>Você não está logado</p>
+    <p>Você não está logado</p>
   @endif
 
   <main>
@@ -23,10 +15,11 @@
           <li><a href="{{ route('users.show', { id: user.id }) }}">{{ user.email }}</a></li>
         @end
       </ul>
-      <h1 class="title"> It Works! </h1>
       <a href="{{ route('auth.create') }}">login</a>
       <a href="{{ route('users.create') }}">Criar Usuário</a>
     </div>
   </main>
-</body>
-</html>
+@end
+
+
+

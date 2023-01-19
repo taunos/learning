@@ -1,0 +1,5 @@
+<button type="{{ type }}">
+  @if($slots.main)
+    {{{ await $slots.main() }}}
+  @end
+</button>

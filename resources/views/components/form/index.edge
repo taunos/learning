@@ -1,0 +1,5 @@
+<form action="{{ action }}" method="{{ method }}">
+  @if($slots.main)
+    {{{ await $slots.main() }}}
+  @end
+</form>
