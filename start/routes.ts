@@ -30,5 +30,6 @@ Route.get('/logout', 'AuthController.destroy').as('auth.destroy')
 
 Route.get('/admin', ({ view }) => {
   return view.render('admin/index')
-}).middleware('auth')
-.as('admin.index')
+})
+  .middleware('auth')
+  .as('admin.index')

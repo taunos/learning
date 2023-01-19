@@ -1,12 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./resources/**/*.{edge,js,ts,jsx,tsx,vue}",
-  ],
+  content: ['./resources/**/*.{edge,js,ts,jsx,tsx,vue}'],
   theme: {
     extend: {},
   },
-  plugins: [
-    require('@tailwindcss/forms'),
-  ],
+  plugins: [require('@tailwindcss/forms')],
 }
