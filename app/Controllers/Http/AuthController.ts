@@ -17,6 +17,6 @@ export default class AuthController {
 
   public async destroy({ auth, response }: HttpContextContract) {
     await auth.use('web').logout()
-    response.redirect().toRoute('auth.create')
+    response.redirect().toRoute('/')
   }
 }

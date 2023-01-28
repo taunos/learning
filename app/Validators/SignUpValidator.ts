@@ -29,6 +29,7 @@ export default class SignUpValidator {
     ]),
     password: schema.string([
       rules.minLength(4),
+      rules.confirmed('passwordConfirm'),
     ])
   })
 
