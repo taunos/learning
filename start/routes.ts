@@ -23,14 +23,23 @@ Route.get('/', async ({ view }) => {
   return view.render('layouts/main.edge')
 })
 
-Route.get('/users', 'UsersController.index').as('users.index')
-Route.get('/users/create', 'UsersController.create').as('users.create')
-Route.post('/users', 'UsersController.store').as('users.store')
-Route.get('/users/:id', 'UsersController.show').as('users.show')
+Route.group(() => {
 
-Route.get('/login', 'AuthController.create').as('auth.create')
-Route.post('/login', 'AuthController.store').as('auth.store')
-Route.get('/logout', 'AuthController.destroy').as('auth.destroy')
+  Route.get('/update/:id', 'UsersController.show').as('edit')
+  Route.post('/update/:id', 'UsersController.update').as('update')
+  Route.get('/create', 'UsersController.create').as('create')
+  Route.get('/:id', 'UsersController.show').as('show')
+  Route.get('/', 'UsersController.index').as('index')
+  Route.post('/', 'UsersController.store').as('store')
+})
+  .prefix('/users')
+  .middleware('auth')
+  .as('users')
+
+  Route.get('/login', 'AuthController.create').as('auth.create')
+  Route.post('/login', 'AuthController.store').as('auth.store')
+  Route.get('/logout', 'AuthController.destroy').as('auth.destroy')
+
 
 Route.get('/admin', ({ view }) => {
   return view.render('admin/index')

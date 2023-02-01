@@ -13,11 +13,24 @@ export default class UsersController {
   public async show({ params, view }: HttpContextContract) {
     const user = await User.findOrFail(params.id)
 
-    return view.render('users/show', { user: user })
+    return view.render('users/update', { user: user })
   }
 
   public async create({ view }: HttpContextContract) {
     return view.render('users/create')
+  }
+
+  public async update({ request, response, params }: HttpContextContract) {
+
+    const user = await User.findOrFail(params.id)
+
+    const { password }  = request.only(['password'])
+
+    user.password = password
+
+    user.save()
+
+    return response.redirect().toRoute('users.show', { id: user.id })
   }
 
   public async store({ request, response }: HttpContextContract) {

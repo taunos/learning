@@ -3,7 +3,6 @@
 @section('content')
   @if(auth.isLoggedIn)
     <p> Olá {{ auth.user.email }} </p>
-    <a href=" {{ route('auth.destroy') }}">Logout</a>
   @else
     <p>Você não está logado</p>
   @endif
@@ -12,11 +11,9 @@
     <div>
       <ul>
         @each(user in users)
-          <li><a href="{{ route('users.show', { id: user.id }) }}">{{ user.email }}</a></li>
+          <li><a href="{{ route('users.edit', { id: user.id }) }}">{{ user.email }}</a></li>
         @end
       </ul>
-      <a href="{{ route('auth.create') }}">login</a>
-      <a href="{{ route('users.create') }}">Criar Usuário</a>
     </div>
   </main>
 @end
