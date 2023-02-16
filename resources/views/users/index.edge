@@ -10,7 +10,7 @@
   <main>
     <div>
       <ul>
-        @each(user in users)
+        @each(user in users.data)
           <li><a href="{{ route('users.edit', { id: user.id }) }}">{{ user.email }}</a></li>
         @end
       </ul>

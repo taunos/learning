@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AdonisJS - A fully featured web framework for Node.js</title>
-  @entryPointStyles('app')
-  @entryPointScripts('app')
-</head>
+@layout('layouts/main')
+
+@section('content')
 <body>
-  @!include('layouts/partials/header')
   <main>
     <div class='text-gray-600 h-screen w-screen flex justify-center items-center'>
       <div class="px-6 py-3 rounded border w-64">
@@ -25,6 +18,9 @@
               @form.button({ type: 'submit' })
                 Login
               @end
+              @if(flashMessages.has(`errors.login`))
+                <p class="mt-2 text-xs text-red-600">{{ flashMessages.get(`errors.login`) }}</p>
+              @end
               <p class="text-xs text-gray-500">
                 Forgot password ?
                 <a href="#" class="font-bold text-gray-700">Click here</a>
@@ -36,4 +32,4 @@
     </div>
   </main>
 </body>
-</html>
+@end

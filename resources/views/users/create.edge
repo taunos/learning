@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create user</title>
-  @entryPointStyles('app')
-  @entryPointScripts('app')
-</head>
+@layout('layouts/main')
+
+@section('content')
 <body>
-  @!include('layouts/partials/header')
   <main>
     <div class='text-gray-600 h-screen w-screen flex justify-center items-center'>
       <div class="px-6 py-3 rounded border w-64">
@@ -18,7 +11,7 @@
               </svg>
               <h2 class="text-2xl font-bold">Criar</h2>
           </div>
-          @form({ action: route('auth.store'), method: 'POST' })
+          @form({ action: route('users.store'), method: 'POST' })
             @!form.input({ name: 'email', type: 'email', label: 'Email' })
             @!form.input({ name: 'password', type: 'password', label: 'Senha' })
             @!form.input({ name: 'passwordConfirm', type: 'password', label: 'Confirme a Senha' })
@@ -32,4 +25,4 @@
     </div>
   </main>
 </body>
-</html>
+@end
