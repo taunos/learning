@@ -1,0 +1,66 @@
+name: test
+on:
+  push:
+    branches:
+    - main
+    - develop
+  pull_request:
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 17.x
+        database-name:
+        - pythia
+        database-password:
+        - postgres
+        database-user:
+        - postgres
+        database-host:
+        - 127.0.0.1
+        database-port:
+        - 5432
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: ${{ matrix.database-name }}
+          POSTGRES_USER: ${{ matrix.database-user }}
+          POSTGRES_PASSWORD: ${{ matrix.database-password }}
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options:
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DB_CONNECTION: pg
+      HOST: '0.0.0.0'
+      PORT: 3333
+      PG_HOST: ${{ matrix.database-host }}
+      PG_PORT: ${{ matrix.database-port }}
+      PG_USER: ${{ matrix.database-user }}
+      PG_PASSWORD: ${{ matrix.database-password }}
+      PG_DB_NAME: ${{ matrix.database-name }}
+      APP_KEY: mGdAMFkm_Wu4OMASBPtx8KWmoOkF_Qgks
+      NODE_ENV: test
+      ASSETS_DRIVER: fake
+      SESSION_DRIVER: memory
+      CACHE_VIEWS: false
+      DRIVE_DISK: local
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install
+        run: npm install
+      - name: Migrate
+        run: node ace migration:fresh && node ace migration:refresh && node ace db:seed
+      - name: Run tests
+        run: npm test
