@@ -18,7 +18,6 @@
 |
 */
 import Route from '@ioc:Adonis/Core/Route'
-import User from 'App/Models/User'
 
 Route.get('/', async ({ view }) => {
   return view.render('home/index')
@@ -31,17 +30,11 @@ Route.group(() => {
   Route.get('/create', 'UsersController.create').as('create')
   Route.get('/:id', 'UsersController.show').as('show')
 
-  //Route.get('/', 'UsersController.index').as('index')
-
-  Route.get('/', async ({ view }) => {
-    const users = await User.query().paginate(1, 10)
-    return view.render('users/index', { users: users.toJSON() })
-  }).as('index')
+  Route.get('/', 'UsersController.index').as('index')
 
   Route.post('/', 'UsersController.store').as('store')
 })
   .prefix('/users')
-  .middleware('auth')
   .as('users')
 
   Route.get('/login', 'AuthController.create').as('auth.create')

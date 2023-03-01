@@ -1,22 +1,30 @@
 @layout('layouts/main')
 
 @section('content')
-  @if(auth.isLoggedIn)
-    <p> Olá {{ auth.user.email }} </p>
-  @else
-    <p>Você não está logado</p>
-  @endif
 
-  <main>
-    <div>
-      <ul>
-        @each(user in users.data)
-          <li><a href="{{ route('users.edit', { id: user.id }) }}">{{ user.email }}</a></li>
-        @end
-      </ul>
-    </div>
-  </main>
+<body>
+  <h1>Users</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      @each(user in users)
+      <tr>
+        <td>{{ user.id }}</td>
+        <td><a href="{{ route('users.edit', { id: user.id }) }}">{{ user.email }}</a></td>
+      </tr>
+      @end
+    </tbody>
+  </table>
+
+  @set('anchors', users.getUrlsForRange(users.firstPage, users.lastPage))
+  @each(anchor in anchors)
+    {{ anchor.page }}
+  @end
+
+</body>
 @end
-
-
-

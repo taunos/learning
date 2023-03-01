@@ -4,8 +4,10 @@ import User from 'App/Models/User'
 import SignUpValidator from 'App/Validators/SignUpValidator'
 
 export default class UsersController {
-  public async index({ view }: HttpContextContract) {
-    const users = await User.all()
+  public async index({ view, request }: HttpContextContract) {
+    const limit = 10
+    const page = request.input('page', 1)
+    const users = await User.query().paginate(page, limit)
 
     return view.render('users/index', { users: users })
   }
